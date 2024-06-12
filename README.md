@@ -6,7 +6,7 @@
 ## Шаблон для автоматизации тестирования на python
 
 ### Шаги
-1. Склонировать проект 'git clone https://github.com/Dashutkabramovich/Pytest_ui_api_chitai_gorod.git'
+1. Склонировать проект 'git clone https://github.com/Dashutkabramovich/Final_certification'
 2. Установить зависимости
 3. Запустить тесты 'pytest'
 

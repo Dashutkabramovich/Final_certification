@@ -14,10 +14,10 @@ from pages.MainPage import MainPage
 @allure.severity("blocker")
 @pytest.mark.positive_test
 def test_chitay_gorod(): 
-    with allure.step("Открытие веб-страницы Chrome и выполнение поиска"):
+    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
         browser = webdriver.Chrome() 
         main_page = MainPage(browser) 
-        main_page.set_cookie_policy() 
+        main_page.set_cookie_policy()
 
 @allure.title("Поиск на кириллице")
 @allure.description("Тест проверяет поиск книги на русском языке")
@@ -25,23 +25,27 @@ def test_chitay_gorod():
 @allure.severity("blocker")
 @pytest.mark.positive_test
 def test_rus_search():
-    with allure.step("Открытие веб-страницы Chrome и выполнение поиска"):
+    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
         browser = webdriver.Chrome() 
         main_page = MainPage(browser) 
         main_page.set_cookie_policy()
-        main_page.rus_search('Капитанская дочка')
-
+        text = main_page.rus_search('Капитанская дочка')
+    with allure.step("Проверка текста с результатами поиска на странице"):
+        assert text[0:52] == "Показываем результаты по запросу «капитанская дочка»"
+        
 @allure.title("Поиск на латинице")
 @allure.description("Тест проверяет поиск книги на английском языке")
 @allure.feature("READ")
 @allure.severity("blocker")
 @pytest.mark.positive_test
 def test_eng_search():
-    with allure.step("Открытие веб-страницы Chrome и выполнение поиска"):
+    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
          browser = webdriver.Chrome()
          main_page = MainPage(browser) 
          main_page.set_cookie_policy()
-         main_page.eng_search('Harry Potter and the philosoprhers stone') 
+         text = main_page.eng_search('Harry Potter and the philosophers stone')
+    with allure.step("Проверка текста с результатами поиска на странице"):
+        assert text[0:74] == "Показываем результаты по запросу «harry potter and the philosophers stone»"
 
 @allure.title("Пустой поиск")
 @allure.description("Тест проверяет вылонение пустого поиска")
@@ -49,11 +53,14 @@ def test_eng_search():
 @allure.severity("trivial")
 @pytest.mark.negative_test 
 def test_empty_search():
-    with allure.step("Открытие веб-страницы Chrome и выполнение поиска"):
+    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
          browser = webdriver.Chrome()
          main_page = MainPage(browser) 
          main_page.set_cookie_policy()
-         main_page.empty_search('no book search term') 
+         main_page.empty_search("")
+    with allure.step("Отсутствие действия на сайте"):
+         url = browser.current_url
+    assert url == "https://www.chitai-gorod.ru/"
 
 @allure.title("Поиск по автору")
 @allure.description("Тест проверяет корректное выполнение поиска по автору")
@@ -61,11 +68,13 @@ def test_empty_search():
 @allure.severity("critical")
 @pytest.mark.positive_test
 def test_author_search():
-    with allure.step("Открытие веб-страницы Chrome и выполнение поиска"):
+    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
          browser = webdriver.Chrome()
          main_page = MainPage(browser) 
          main_page.set_cookie_policy()
-         main_page.author_search('Шекспир') 
+         text = main_page.author_search('Шекспир')
+    with allure.step("Проверка текста с результатами поиска на странице"):
+        assert text[0:42] == "Показываем результаты по запросу «шекспир»"
 
 @allure.title("Поиск по двум книгам")
 @allure.description("Тест проверяет корректное выполнение поиска сразу по нескольким книгам")
@@ -73,11 +82,13 @@ def test_author_search():
 @allure.severity("critical")
 @pytest.mark.positive_test
 def test_books_search():
-    with allure.step("Открытие веб-страницы Chrome и выполнение поиска"):
+    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
         browser = webdriver.Chrome()
         main_page = MainPage(browser) 
         main_page.set_cookie_policy()
-        main_page.books_search('Бесприданница, Золушка') 
+        text = main_page.books_search('Бесприданница, Золушка') 
+    with allure.step("Проверка текста с результатами поиска на странице "):
+        assert text[0:56] == "Показываем результаты по запросу «бесприданница золушка»"
 
 @allure.title("Поиск по категории")
 @allure.description("Тест проверяет корректное выполнение поиска по категории книг")
@@ -85,11 +96,13 @@ def test_books_search():
 @allure.severity("critical")
 @pytest.mark.positive_test
 def test_series_search():
-    with allure.step("Открытие веб-страницы Chrome и выполнение поиска"):
+    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
         browser = webdriver.Chrome()
         main_page = MainPage(browser) 
         main_page.set_cookie_policy()
-        main_page.series_search('Книги для детей') 
+        text = main_page.series_search('Книги для детей') 
+    with allure.step("Проверка текста с результатами поиска на странице"):
+        assert text[0:50] == "Показываем результаты по запросу «книги для детей»"
 
 @allure.title("Просмотр акций")
 @allure.description("Тест проверяет открытие страницы с промоакциями")
@@ -97,11 +110,14 @@ def test_series_search():
 @allure.severity("normal")
 @pytest.mark.positive_test
 def test_promo():
-    with allure.step("Открытие веб-страницы Chrome и выполнение поиска"):
+    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
         browser = webdriver.Chrome()
         main_page = MainPage(browser) 
         main_page.set_cookie_policy()
-        main_page.promotions()
+        text = main_page.promotions()
+    with allure.step("Проверка текста с результатами поиска на странице"):
+         url = browser.current_url
+    assert url == "https://www.chitai-gorod.ru/promotions"
 
 @allure.title("Поиск по каталогу")
 @allure.description("Тест проверяет корректное выполнение поиска, используя каталог")
@@ -109,11 +125,13 @@ def test_promo():
 @allure.severity("normal")
 @pytest.mark.positive_test
 def test_catalog_search():
-    with allure.step("Открытие веб-страницы Chrome и выполнение поиска"):
+    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
         browser = webdriver.Chrome()
         main_page = MainPage(browser) 
         main_page.set_cookie_policy()
-        main_page.catalog_search() 
+        text = main_page.catalog_search() 
+    with allure.step("Проверка текста в выбранной категории каталога"):
+        assert text[0:14] == "СТИХИ И ПОЭЗИЯ"
 
 @allure.title("Поиск по фильтру")
 @allure.description("Тест проверяет корректное выполнение поиска, используя фильтр")
@@ -121,13 +139,13 @@ def test_catalog_search():
 @allure.severity("normal")
 @pytest.mark.positive_test
 def test_filter_online():
-   with allure.step("Открытие веб-страницы Chrome и выполнение поиска"):
-        browser = webdriver.Chrome()
-        main_page = MainPage(browser)
-        main_page.set_cookie_policy() 
-        main_page.rus_search('Айвенго')
-   with allure.step("Проверка фильтра'Сначала новые'"):
-        main_page.filter_online('') 
+    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
+        browser = webdriver.Chrome() 
+        main_page = MainPage(browser) 
+        main_page.set_cookie_policy()
+        text = main_page.filter_online('Айвенго')
+    with allure.step("Проверка текста с результатами поиска на странице, отфильтрованным по новым"):
+        assert text[0:42] == "Показываем результаты по запросу «айвенго»"
         
 @allure.title("Проверка пустой корзины")
 @allure.description("Тест проверяет, что в пустой корзине воникает сообщение 'В корзине ничего нет'")
@@ -135,7 +153,7 @@ def test_filter_online():
 @allure.severity("blocker")
 @pytest.mark.positive_test
 def test_get_empty_result_message():
-    with allure.step("Открытие веб-страницы Chrome"):
+    with allure.step("Открытие веб-страницы в Chrome"):
         browser = webdriver.Chrome()
         main_page = MainPage(browser)
         main_page.set_cookie_policy() 

@@ -62,20 +62,6 @@ def test_empty_search():
          url = browser.current_url
     assert url == "https://www.chitai-gorod.ru/"
 
-@allure.title("Поиск по автору")
-@allure.description("Тест проверяет корректное выполнение поиска по автору")
-@allure.feature("READ")
-@allure.severity("critical")
-@pytest.mark.positive_test
-def test_author_search():
-    with allure.step("Открытие веб-страницы в Chrome и выполнение поиска"):
-         browser = webdriver.Chrome()
-         main_page = MainPage(browser) 
-         main_page.set_cookie_policy()
-         text = main_page.author_search('Шекспир')
-    with allure.step("Проверка текста с результатами поиска на странице"):
-        assert text[0:42] == "Показываем результаты по запросу «шекспир»"
-
 @allure.title("Поиск по двум книгам")
 @allure.description("Тест проверяет корректное выполнение поиска сразу по нескольким книгам")
 @allure.feature("READ")

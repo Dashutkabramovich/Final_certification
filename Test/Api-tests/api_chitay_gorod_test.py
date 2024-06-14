@@ -10,8 +10,8 @@ base_url = "https://web-gate.chitai-gorod.ru/api"
 headers = { 
 
         'content-type': 'application/json',
-        'authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3VzZXItcmlnaHQiLCJzdWIiOjIwNzIxODE5LCJpYXQiOjE3MTgzNTQ2NTMsImV4cCI6MTcxODM1ODI1MywidHlwZSI6MjB9.sEJaGJrClJPYdPniOk_YI55ZEiFfpiB5yX4GoCQZwLo"
-
+        'authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3VzZXItcmlnaHQiLCJzdWIiOjIwNzIxODE5LCJpYXQiOjE3MTgzNjQ0ODksImV4cCI6MTcxODM2ODA4OSwidHlwZSI6MjB9.g615xsNaWba4oOuFtkoX0lqV1U3FtL1oQYas-CrUMeU"
+         
     }
 
 @allure.title("Поиск по одному слову")

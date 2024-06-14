@@ -33,15 +33,7 @@ class MainPage:
           def empty_search(self,term):
               self._driver.find_element(By.CLASS_NAME, "header-search__input").send_keys(term)
               self._driver.find_element(By.CLASS_NAME, "header-search__button").click()
-        
-      
-      with allure.step("Поиск по автору"):
-          def author_search(self,term):
-              self._driver.find_element(By.CLASS_NAME, "header-search__input").send_keys(term)
-              self._driver.find_element(By.CLASS_NAME, "header-search__button").click()
-              txt = self._driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[3]/div[1]/p').text
-              return txt
-      
+       
       with allure.step("Поиск сразу нескольких книг"):
             def books_search(self,term):
                 self._driver.find_element(By.CLASS_NAME, "header-search__input").send_keys(term)

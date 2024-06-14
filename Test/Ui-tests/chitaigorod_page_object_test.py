@@ -32,7 +32,7 @@ def test_rus_search():
         text = main_page.rus_search('Капитанская дочка')
     with allure.step("Проверка текста с результатами поиска на странице"):
         assert text[0:52] == "Показываем результаты по запросу «капитанская дочка»"
-        
+
 @allure.title("Поиск на латинице")
 @allure.description("Тест проверяет поиск книги на английском языке")
 @allure.feature("READ")
